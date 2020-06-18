@@ -1,0 +1,24 @@
+/*
+Given 2 arrays containing an identical number of items, iterate through them and create
+a hash/map with an element from the first array as key and element from the second
+array as value.
+*/
+
+package main
+import "fmt"
+
+
+func Hash_Map(array1 int[], array2 int[]){
+	array1:=[5]int{1,2,3,4,5}
+    	array2:=[5]int{5,4,3,2,1}
+    	length:=len(array1)
+	m:= make(map[int]int)
+
+	for i:=0; i<length; i++{
+		m[array1[i]]=array2[i]
+		}
+	
+	for key, value := range m {
+		fmt.Println("Key:", key, "Value:", value)
+	}		
+}

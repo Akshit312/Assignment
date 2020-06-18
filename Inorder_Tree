@@ -1,0 +1,34 @@
+/*
+Given inorder and postorder traversal of a tree, construct the binary tree.
+Note:
+You may assume that duplicates do not exist in the tree.
+*/
+
+package main
+import "fmt"
+
+func build_ipTree(post int[], postOrder_start int, postOrder_End int, inStart int, index map[int]int) *TreeNode {
+	if postOrder_start > postOrder_End {
+		return nil
+	}
+
+	root := &TreeNode{Val: post[postOrder_End]}
+	
+	var rootIndex int= index[post[postOrder_End]]
+	var left_Length int= rootIndex - inStart
+	
+	root.Left = build_ipTree(post, postOrder_start, postOrder_start+left_Length-1, inStart, index)
+	root.Right = build_ipTree(post, postOrder_start+left_Length, postOrder_End-1, rootIndex+1, index)
+
+	return root
+}
+
+func buildTree(inorder []int, postorder []int) *TreeNode {
+	index := make(map[int]int)
+	var length int=len(inorder)
+	
+	for i := 0; i < length; i++ {
+		index[inorder[i]] = i
+	}
+	return build_ipTree(postorder, 0, len(postorder)-1, 0, index)
+}

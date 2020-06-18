@@ -1,0 +1,42 @@
+/*
+Write logic to determine whether a number is prime or not. Implement this logic once
+using iteration and another time as recursion.
+*/
+
+package main
+import "fmt"
+import "math"
+
+
+//Recursive
+
+func checkPrime(n int, i int) bool{
+    
+     if (n <= 2){
+            if (n==2){
+                return true
+            }else{
+                return false
+            }
+        }
+        if (n % i == 0){
+            return false
+        }
+        if (i * i > n){
+            return true
+        }
+		
+		return checkPrime(n, i + 1); 
+    } 
+	
+	
+// Iterative
+
+func checkPrime(n int) bool{
+    for i := 2; i <= int(math.Floor(math.Sqrt(float64(n)))); i++{
+        if n%i == 0 {
+            return false
+        }
+    }
+        return true
+}	
